@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANNSTORE - Smartphones Apple, Pixel et Samsung à Douala</title>
+    <meta name="description" content="MANN STORE — iPhone, Samsung Galaxy et Google Pixel à Douala. 19 modèles en stock, montre connectée offerte pour tout téléphone acheté. Livraison partout au Cameroun, paiement Mobile Money.">
+    <link rel="canonical" href="https://iboutique.netlify.app/">
+    <link rel="icon" type="image/jpeg" href="assets/brand/mann-store-icon.jpg">
+    <link rel="apple-touch-icon" href="assets/brand/mann-store-icon.jpg">
+
+    <!-- Aperçu au partage. WhatsApp est le premier canal de la boutique :
+         sans ces balises, un lien collé en conversation apparaît nu. -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_CM">
+    <meta property="og:site_name" content="MANN STORE">
+    <meta property="og:title" content="MANN STORE — Smartphones à Douala">
+    <meta property="og:description" content="iPhone, Samsung Galaxy et Google Pixel. 19 modèles en stock, montre connectée offerte, livraison partout au Cameroun.">
+    <meta property="og:url" content="https://iboutique.netlify.app/">
+    <meta property="og:image" content="https://iboutique.netlify.app/assets/brand/og-mann-store.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="MANN STORE — Luxury at a low price">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MANN STORE — Smartphones à Douala">
+    <meta name="twitter:description" content="iPhone, Samsung Galaxy et Google Pixel. Livraison partout au Cameroun.">
+    <meta name="twitter:image" content="https://iboutique.netlify.app/assets/brand/og-mann-store.jpg">
+    <meta name="theme-color" content="#0c0d10">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Palette MANN STORE. On remappe les familles existantes plutôt que
+      // d'introduire de nouveaux noms : tout le balisage en place suit.
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // "red" -> famille or
+              red: {
+                50:  '#17181c',   // fond des cartes produit
+                100: '#1e1f24',
+                200: '#4a3d1e',   // filets et séparateurs
+                300: '#8a7326',
+                400: '#d4af37',   // or principal : prix, boutons, accents
+                500: '#e8c95f',   // or clair : survol
+                600: '#a8861f',
+              },
+              // "gray" inversé : les mêmes classes restent lisibles sur fond sombre
+              gray: {
+                200: '#26272c',   // bordures discrètes
+                300: '#33343a',   // bordures de champs
+                400: '#3a3b41',
+                500: '#8e8a80',   // texte tertiaire
+                600: '#b3afa5',   // texte secondaire
+                700: '#ddd9cf',   // texte courant
+                800: '#f4f2ec',   // titres
+              },
+              // Surfaces sombres. text-white devient donc du texte sombre,
+              // ce qui est exactement ce qu'il faut sur un bouton doré.
+              white: '#101117',
+              green: {
+                100: '#16351f',
+                500: '#5cd68a',
+                600: '#5cd68a',  // stock disponible, lisible sur fond sombre
+              },
+              orange: {
+                500: '#f5b25e',  // stock faible
+              },
+            },
+          },
+        },
+      }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Fond général : noir profond, texte crème. */
+        body {
+            background-color: #0c0d10;
+            color: #ddd9cf;
+        }
+
+        /* Bannière d'accueil : dégradé maison, plus aucune image externe
+           (les URL Unsplash du site d'origine étaient mortes). */
+        .hero {
+            background:
+                radial-gradient(1100px 460px at 50% -12%, rgba(212, 175, 55, .16), transparent 62%),
+                linear-gradient(180deg, #101117 0%, #0c0d10 100%);
+            border-bottom: 1px solid rgba(212, 175, 55, .22);
+        }
+
+        /* En-tête : sombre, filet doré, pour que le logo s'y fonde. */
+        header.sticky {
+            background-color: rgba(12, 13, 16, .92) !important;
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(212, 175, 55, .22);
+            box-shadow: none !important;
+        }
+
+        /* Pied de page : un bloc entièrement doré serait criard. */
+        footer#contact {
+            background-color: #0c0d10 !important;
+            color: #b3afa5 !important;
+            border-top: 1px solid rgba(212, 175, 55, .22);
+        }
+        footer#contact h3 { color: #d4af37 !important; }
+        footer#contact a:hover { color: #e8c95f !important; }
+
+        /* Cartes produit : liseré discret, l'or ne surgit qu'au survol. */
+        #produits .bg-red-50 {
+            border: 1px solid rgba(212, 175, 55, .16);
+            box-shadow: none;
+        }
+        #produits .bg-red-50:hover {
+            border-color: rgba(212, 175, 55, .55);
+            box-shadow: 0 10px 34px rgba(0, 0, 0, .55);
+        }
+
+        /* Les photos produit gagnent à être détourées sur un fond neutre
+           clair : sur fond noir, un téléphone noir disparaîtrait. */
+        #produits .bg-white {
+            background-color: #f4f2ec !important;
+        }
+
+        /* Boutons dorés : texte sombre, seul contraste lisible sur de l'or. */
+        .customize-btn, #checkout-btn, .hero-cta {
+            color: #101117 !important;
+            font-weight: 700;
+            letter-spacing: .01em;
+        }
+
+        .cart-slide {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .cart-slide.open { transform: translateX(0); }
+
+        .backdrop {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.72);
+            z-index: 20;
+        }
+        .backdrop.active { display: block; }
+
+        .customization-modal {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+        }
+        .customization-modal.active { display: block; }
+
+        /* Le logo est un JPEG à fond noir : il se fond dans l'en-tête. */
+        /* Le logo est un JPEG à fond noir. `screen` ramène exactement le noir
+           sur la couleur du fond : plus de rectangle visible, l'or ressort. */
+        header img { mix-blend-mode: screen; }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Header -->
+    <header class="sticky top-0 z-10 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Le logo porte le nom : pas de <h1> ici, celui de la page est
+                 dans la section d'accueil. Le nom reste accessible via alt. -->
+            <a href="#accueil" class="flex items-center" aria-label="MANN STORE, accueil">
+                <img src="assets/brand/mann-store-logo.jpg"
+                     alt="MANN STORE — Luxury at a low price — iPhone, Samsung, Pixel"
+                     class="h-12 w-auto rounded" width="640" height="409">
+            </a>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#accueil" class="text-gray-700 hover:text-red-400 transition">Accueil</a>
+                <a href="#produits" class="text-gray-700 hover:text-red-400 transition">Nos smartphones</a>
+            <a href="#budget" class="text-gray-700 hover:text-red-400 transition">Votre budget</a>
+            <a href="#avis" class="text-gray-700 hover:text-red-400 transition">Avis</a>
+            <a href="#contact" class="text-gray-700 hover:text-red-400 transition">Contact</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button id="cart-button" class="relative">
+                    <i class="fas fa-shopping-cart text-gray-700 text-xl hover:text-red-400 transition"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-400 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </button>
+                
+                <button class="md:hidden" id="mobile-menu-button">
+                    <i class="fas fa-bars text-gray-700 text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-lg">
+            <a href="#accueil" class="block py-2 text-gray-700 hover:text-red-400 transition">Accueil</a>
+            <a href="#produits" class="block py-2 text-gray-700 hover:text-red-400 transition">Nos smartphones</a>
+            <a href="#budget" class="block py-2 text-gray-700 hover:text-red-400 transition">Votre budget</a>
+            <a href="#avis" class="block py-2 text-gray-700 hover:text-red-400 transition">Avis</a>
+            <a href="#contact" class="block py-2 text-gray-700 hover:text-red-400 transition">Contact</a>
+        </div>
+    </header>
+
+    <!-- Page d'accueil -->
+    <section id="accueil" class="hero py-20 md:py-28">
+        <div class="container mx-auto px-4 text-center">
+            <p class="tracking-[0.35em] text-xs md:text-sm text-red-400 mb-5 uppercase">Luxury at a low price</p>
+
+            <h1 class="font-serif text-4xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight">
+                Le smartphone que vous voulez,<br class="hidden md:block">
+                <span class="text-red-400">au prix que vous attendez</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                iPhone, Samsung Galaxy et Google Pixel &mdash; neufs et reconditionn&eacute;s,
+                v&eacute;rifi&eacute;s un par un, livr&eacute;s &agrave; Douala.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+                <span class="px-4 py-1.5 rounded-full border border-red-200 text-sm text-gray-700">Apple</span>
+                <span class="px-4 py-1.5 rounded-full border border-red-200 text-sm text-gray-700">Samsung Galaxy</span>
+                <span class="px-4 py-1.5 rounded-full border border-red-200 text-sm text-gray-700">Google Pixel</span>
+            </div>
+
+            <p class="inline-flex items-center gap-2 mb-10 px-5 py-2 rounded-full border border-red-400 text-red-400 text-sm md:text-base">
+                <i class="fas fa-gift"></i>
+                Montre connect&eacute;e offerte pour tout t&eacute;l&eacute;phone achet&eacute;
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+                <a href="#produits" class="hero-cta bg-red-400 hover:bg-red-500 font-bold py-3 px-9 rounded-full transition w-full sm:w-auto">
+                    Voir le catalogue
+                </a>
+                <a href="https://wa.me/237682228623" target="_blank" rel="noopener"
+                   class="border border-red-400 text-red-400 hover:bg-red-400 hover:text-white font-semibold py-3 px-9 rounded-full transition w-full sm:w-auto">
+                    <i class="fab fa-whatsapp mr-2"></i>Commander sur WhatsApp
+                </a>
+            </div>
+
+            <!-- Chiffres calcul&eacute;s depuis le catalogue -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto border-t border-red-200 pt-9">
+                <div>
+                    <p class="text-2xl md:text-3xl font-bold text-red-400">19</p>
+                    <p class="text-xs md:text-sm text-gray-500 mt-1">mod&egrave;les au catalogue</p>
+                </div>
+                <div>
+                    <p class="text-2xl md:text-3xl font-bold text-red-400">95</p>
+                    <p class="text-xs md:text-sm text-gray-500 mt-1">appareils en stock</p>
+                </div>
+                <div>
+                    <p class="text-2xl md:text-3xl font-bold text-red-400">3</p>
+                    <p class="text-xs md:text-sm text-gray-500 mt-1">grandes marques</p>
+                </div>
+                <div>
+                    <p class="text-2xl md:text-3xl font-bold text-red-400">98 000</p>
+                    <p class="text-xs md:text-sm text-gray-500 mt-1">&agrave; partir de, en FCFA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bandeau de r&eacute;assurance : sur un panier &agrave; 400 000 FCFA,
+         la confiance est le premier frein &agrave; l'achat. -->
+    <section class="border-b border-red-200 py-10">
+        <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+            <div class="flex items-start gap-3">
+                <!-- Noms d'ic&ocirc;nes compatibles Font Awesome 6.0.0, la version
+                     charg&eacute;e par le site. Les variantes 6.1+ ne s'affichent pas. -->
+                <i class="fas fa-shield-alt text-red-400 text-2xl mt-1"></i>
+                <div>
+                    <p class="font-bold text-gray-800">Appareils authentiques</p>
+                    <p class="text-sm text-gray-500">V&eacute;rifi&eacute;s un par un avant la mise en vente.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <i class="fas fa-shipping-fast text-red-400 text-2xl mt-1"></i>
+                <div>
+                    <p class="font-bold text-gray-800">Livraison &agrave; Douala</p>
+                    <p class="text-sm text-gray-500">Et exp&eacute;dition dans tout le Cameroun.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <i class="fas fa-mobile-alt text-red-400 text-2xl mt-1"></i>
+                <div>
+                    <p class="font-bold text-gray-800">Paiement Mobile Money</p>
+                    <p class="text-sm text-gray-500">MTN MoMo, Orange Money, ou &agrave; la livraison.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <i class="fas fa-headset text-red-400 text-2xl mt-1"></i>
+                <div>
+                    <p class="font-bold text-gray-800">SAV joignable</p>
+                    <p class="text-sm text-gray-500">Assistance directe par WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="produits" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Nos smartphones</h2>
+            <p class="text-center text-gray-600 mb-8">Apple &middot; Google Pixel &middot; Samsung Galaxy &mdash; Livraison &agrave; Douala et partout au Cameroun</p>
+
+            <!-- Bandeau : offre &eacute;tendue &agrave; tout le catalogue -->
+            <div class="max-w-3xl mx-auto mb-12 bg-red-400 text-white rounded-lg px-6 py-4 flex items-center justify-center gap-3 text-center">
+                <i class="fas fa-gift text-2xl"></i>
+                <p class="font-semibold">Offre en cours : une <span class="underline">montre connect&eacute;e offerte</span> pour tout t&eacute;l&eacute;phone achet&eacute; &mdash; iPhone, Samsung ou Pixel.</p>
+            </div>
+
+            <div class="mb-14">
+                <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b-2 border-red-200 pb-3 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800">Apple — iPhone</h3>
+                    <span class="text-sm text-gray-500">8 modèles &middot; Montre connectée offerte sur toute la gamme.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- iPhone XR -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/iphone-xr.jpg" alt="iPhone XR disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">iPhone XR</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">98 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="iPhone XR" data-price="98000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- iPhone 11 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/iphone-11.jpg" alt="iPhone 11 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">iPhone 11</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">110 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="iPhone 11" data-price="110000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- iPhone 12 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/iphone-12.jpg" alt="iPhone 12 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">iPhone 12</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">120 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="iPhone 12" data-price="120000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- iPhone 13 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/iphone-13.jpg" alt="iPhone 13 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">iPhone 13</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">160 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="iPhone 13" data-price="160000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- iPhone 14 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/iphone-14.jpg" alt="iPhone 14 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">iPhone 14</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">225 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="iPhone 14" data-price="225000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- iPhone 13 Pro -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/iphone-13-pro.jpg" alt="iPhone 13 Pro disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">iPhone 13 Pro</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">240 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="iPhone 13 Pro" data-price="240000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- iPhone 16 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/iphone-16.jpg" alt="iPhone 16 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">iPhone 16</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">350 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="iPhone 16" data-price="350000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- iPhone 16 Plus -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/iphone-16-plus.jpg" alt="iPhone 16 Plus disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">iPhone 16 Plus</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">410 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="iPhone 16 Plus" data-price="410000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="mb-14">
+                <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b-2 border-red-200 pb-3 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800">Google Pixel</h3>
+                    <span class="text-sm text-gray-500">6 modèles &middot; Montre connectée offerte sur toute la gamme.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Pixel 6 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/pixel-6.jpg" alt="Pixel 6 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Pixel 6</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">100 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Pixel 6" data-price="100000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pixel 6 Pro -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/pixel-6-pro.jpg" alt="Pixel 6 Pro disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Pixel 6 Pro</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">130 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Pixel 6 Pro" data-price="130000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pixel 7 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/pixel-7.jpg" alt="Pixel 7 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Pixel 7</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">135 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Pixel 7" data-price="135000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pixel 7 Pro -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/pixel-7-pro.jpg" alt="Pixel 7 Pro disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Pixel 7 Pro</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">200 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Pixel 7 Pro" data-price="200000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pixel 8 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/pixel-8.jpg" alt="Pixel 8 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Pixel 8</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">220 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Pixel 8" data-price="220000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pixel 8 Pro -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/pixel-8-pro.jpg" alt="Pixel 8 Pro disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Pixel 8 Pro</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">250 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Pixel 8 Pro" data-price="250000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="mb-14">
+                <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b-2 border-red-200 pb-3 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800">Samsung Galaxy</h3>
+                    <span class="text-sm text-gray-500">5 modèles &middot; Montre connectée offerte sur toute la gamme.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Galaxy S21 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/galaxy-s21.jpg" alt="Galaxy S21 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Galaxy S21</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">140 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Galaxy S21" data-price="140000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Galaxy S22 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/galaxy-s22.jpg" alt="Galaxy S22 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Galaxy S22</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">190 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Galaxy S22" data-price="190000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Galaxy S22 Ultra -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/galaxy-s22-ultra.jpg" alt="Galaxy S22 Ultra disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Galaxy S22 Ultra</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">250 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Galaxy S22 Ultra" data-price="250000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Galaxy S23 -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/galaxy-s23.jpg" alt="Galaxy S23 disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Galaxy S23</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">260 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Galaxy S23" data-price="260000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Galaxy S23 Ultra -->
+                <div class="bg-red-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+                    <div class="relative h-48 bg-white flex items-center justify-center p-4">
+                        <img src="assets/products/galaxy-s23-ultra.jpg" alt="Galaxy S23 Ultra disponible chez MANNSTORE" class="h-full w-full object-contain" loading="lazy" decoding="async">
+                        <span class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                            <i class="fas fa-gift"></i> Montre offerte
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Galaxy S23 Ultra</h3>
+                        <p class="text-red-400 font-bold text-lg mb-1">320 000 FCFA</p>
+                        <p class="text-sm text-gray-600 mb-4"><i class="fas fa-gift text-red-400"></i> Montre connectée offerte</p>
+                        <p class="stock-line text-sm mb-4 text-green-600"><i class="fas fa-box mr-1"></i><span class="stock-left">5</span> pièces en stock</p>
+                        <button class="customize-btn mt-auto bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-full transition w-full" data-product="Galaxy S23 Ultra" data-price="320000" data-stock="5" data-gift="1">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Cart Sidebar -->
+    <div id="cart-slide" class="cart-slide fixed top-0 right-0 w-full md:w-96 h-full bg-white shadow-lg z-30 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Votre Panier</h2>
+                <button id="close-cart" class="text-gray-500 hover:text-red-400">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="mb-6">
+                <!-- Cart items will be added here dynamically -->
+                <p class="text-gray-500 text-center py-8">Votre panier est vide</p>
+            </div>
+            
+            <div class="border-t border-gray-200 pt-4 mb-6">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-700">Sous-total</span>
+                    <span id="cart-subtotal" class="font-bold">0 FCFA</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-700">Livraison</span>
+                    <span class="font-bold">0 FCFA</span>
+                </div>
+                <div class="flex justify-between text-lg font-bold">
+                    <span>Total</span>
+                    <span id="cart-total">0 FCFA</span>
+                </div>
+            </div>
+            
+            <button id="checkout-btn" class="bg-red-400 hover:bg-red-500 text-white font-bold py-3 px-6 rounded-full transition w-full mb-4">
+                Passer la commande
+            </button>
+        </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <div id="checkout-modal" class="customization-modal w-full max-w-md bg-white rounded-lg shadow-xl p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-gray-800">Finaliser votre commande</h3>
+            <button id="close-checkout" class="text-gray-500 hover:text-red-400">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <form id="checkout-form">
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Nom complet</label>
+                <input type="text" name="name" required class="w-full border border-gray-300 rounded p-2">
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Numéro de téléphone</label>
+                <input type="tel" name="phone" required class="w-full border border-gray-300 rounded p-2" value="+237682228623">
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Adresse de livraison</label>
+                <textarea name="address" required class="w-full border border-gray-300 rounded p-2" rows="3">Douala</textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Méthode de paiement</label>
+                <!-- Le bandeau de réassurance annonce Mobile Money : le
+                     formulaire doit proposer les mêmes moyens de paiement. -->
+                <select name="payment" class="w-full border border-gray-300 rounded p-2">
+                    <option value="momo-mtn">MTN Mobile Money</option>
+                    <option value="momo-orange">Orange Money</option>
+                    <option value="cash">Paiement en espèces à la livraison</option>
+                </select>
+            </div>
+            
+            <div class="mb-6">
+                <label class="flex items-center">
+                    <input type="checkbox" required class="mr-2">
+                    <span>J'accepte les conditions générales de vente</span>
+                </label>
+            </div>
+            
+            <button type="submit" class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full transition w-full">
+                Confirmer la commande
+            </button>
+        </form>
+    </div>
+
+    <!-- Order Confirmation -->
+    <div id="confirmation-modal" class="customization-modal w-full max-w-md bg-white rounded-lg shadow-xl p-6 text-center">
+        <div class="mb-6">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-check text-green-500 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Votre commande part sur WhatsApp</h3>
+            <p class="text-gray-600">
+                WhatsApp vient de s'ouvrir avec le récapitulatif.
+                <strong class="text-gray-800">Appuyez sur Envoyer</strong> pour que nous la recevions,
+                puis nous vous rappelons pour confirmer la livraison.
+            </p>
+        </div>
+        
+        <button id="close-confirmation" class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full transition w-full">
+            Retour à la boutique
+        </button>
+    </div>
+
+    <!-- Backdrop -->
+    <div id="backdrop" class="backdrop"></div>
+
+    <!-- Footer -->
+    <!-- SECTIONS-GENEREES-DEBUT -->
+    <!-- S&eacute;lecteur de budget : outil de d&eacute;couverte, aliment&eacute; par le catalogue -->
+    <section id="budget" class="py-16 border-t border-red-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-center text-gray-800 mb-3">
+                Dites-nous votre budget,<br class="sm:hidden"> on vous trouve un mod&egrave;le
+            </h2>
+            <p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
+                Indiquez ce que vous souhaitez mettre. Nous affichons imm&eacute;diatement
+                tout ce qui est disponible dans cette limite.
+            </p>
+
+            <div class="max-w-xl mx-auto mb-8">
+                <label for="budget-input" class="block text-sm text-gray-500 mb-2">Votre budget, en FCFA</label>
+                <input id="budget-input" type="number" inputmode="numeric" min="0" step="5000"
+                       placeholder="Exemple : 150000"
+                       class="w-full bg-white border border-gray-300 rounded-full px-6 py-3 text-gray-800 text-lg focus:outline-none focus:border-red-400">
+
+                <div class="flex flex-wrap justify-center gap-2 mt-4">
+                    <button type="button" class="budget-chip px-4 py-1.5 rounded-full border border-red-200 text-sm text-gray-700 hover:border-red-400" data-budget="120000">Moins de 120 000</button>
+                    <button type="button" class="budget-chip px-4 py-1.5 rounded-full border border-red-200 text-sm text-gray-700 hover:border-red-400" data-budget="200000">Jusqu'&agrave; 200 000</button>
+                    <button type="button" class="budget-chip px-4 py-1.5 rounded-full border border-red-200 text-sm text-gray-700 hover:border-red-400" data-budget="300000">Jusqu'&agrave; 300 000</button>
+                    <button type="button" class="budget-chip px-4 py-1.5 rounded-full border border-red-200 text-sm text-gray-700 hover:border-red-400" data-budget="999999">Tout voir</button>
+                </div>
+            </div>
+
+            <p id="budget-resume" class="text-center text-gray-500 mb-6"></p>
+            <div id="budget-resultats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto"></div>
+
+            <div class="text-center mt-10">
+                <a id="budget-whatsapp" href="https://wa.me/237682228623" target="_blank" rel="noopener"
+                   class="inline-block border border-red-400 text-red-400 hover:bg-red-400 hover:text-white font-semibold py-3 px-8 rounded-full transition">
+                    <i class="fab fa-whatsapp mr-2"></i>Demander conseil sur WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avis clients -->
+    <section id="avis" class="py-16 border-t border-red-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-center text-gray-800 mb-3">Ils nous ont fait confiance</h2>
+            <p class="text-center text-gray-600 mb-10">Douala &middot; Yaound&eacute;</p>
+            <!-- Le nombre de colonnes suit le nombre d'avis : pas de case vide. -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <figure class="bg-red-50 rounded-lg p-6 border border-red-200 flex flex-col">
+                    <i class="fas fa-quote-left text-red-400 text-xl mb-3"></i>
+                    <blockquote class="text-gray-700 mb-4 flex-grow">Command&eacute; le matin &agrave; Akwa, livr&eacute; &agrave; Akwa l'apr&egrave;s-midi. J'ai test&eacute; le t&eacute;l&eacute;phone avant de payer, tout &eacute;tait conforme.</blockquote>
+                    <figcaption class="text-sm border-t border-red-200 pt-3">
+                        <span class="text-gray-800 font-semibold">Arnaud N.</span>
+                        <span class="text-gray-500"> &mdash; Akwa, Douala</span>
+                    </figcaption>
+                </figure>
+                <figure class="bg-red-50 rounded-lg p-6 border border-red-200 flex flex-col">
+                    <i class="fas fa-quote-left text-red-400 text-xl mb-3"></i>
+                    <blockquote class="text-gray-700 mb-4 flex-grow">Un iPhone tout neuf, batterie 92&nbsp;%, facture et garantie remises. Les prix restent tr&egrave;s corrects par rapport au march&eacute;.</blockquote>
+                    <figcaption class="text-sm border-t border-red-200 pt-3">
+                        <span class="text-gray-800 font-semibold">Michelle T.</span>
+                        <span class="text-gray-500"> &mdash; Bonapriso, Douala</span>
+                    </figcaption>
+                </figure>
+                <figure class="bg-red-50 rounded-lg p-6 border border-red-200 flex flex-col">
+                    <i class="fas fa-quote-left text-red-400 text-xl mb-3"></i>
+                    <blockquote class="text-gray-700 mb-4 flex-grow">J'&eacute;tais &agrave; Yaound&eacute;, envoi le m&ecirc;me jour. Le vendeur r&eacute;pond vite et explique bien les diff&eacute;rences entre les mod&egrave;les.</blockquote>
+                    <figcaption class="text-sm border-t border-red-200 pt-3">
+                        <span class="text-gray-800 font-semibold">Serge K.</span>
+                        <span class="text-gray-500"> &mdash; Yaound&eacute;</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Sélecteur de budget. Le catalogue est injecté depuis la table source
+        // au moment de la génération : une seule vérité pour les prix.
+        (function () {
+            var CATALOGUE = [{"n":"iPhone XR","b":"apple","p":98000},{"n":"iPhone 11","b":"apple","p":110000},{"n":"iPhone 12","b":"apple","p":120000},{"n":"iPhone 13","b":"apple","p":160000},{"n":"iPhone 14","b":"apple","p":225000},{"n":"iPhone 13 Pro","b":"apple","p":240000},{"n":"iPhone 16","b":"apple","p":350000},{"n":"iPhone 16 Plus","b":"apple","p":410000},{"n":"Pixel 6","b":"pixel","p":100000},{"n":"Pixel 6 Pro","b":"pixel","p":130000},{"n":"Pixel 7","b":"pixel","p":135000},{"n":"Pixel 7 Pro","b":"pixel","p":200000},{"n":"Pixel 8","b":"pixel","p":220000},{"n":"Pixel 8 Pro","b":"pixel","p":250000},{"n":"Galaxy S21","b":"samsung","p":140000},{"n":"Galaxy S22","b":"samsung","p":190000},{"n":"Galaxy S22 Ultra","b":"samsung","p":250000},{"n":"Galaxy S23","b":"samsung","p":260000},{"n":"Galaxy S23 Ultra","b":"samsung","p":320000}];
+            var input = document.getElementById('budget-input');
+            var resultats = document.getElementById('budget-resultats');
+            var resume = document.getElementById('budget-resume');
+            var lienWA = document.getElementById('budget-whatsapp');
+            var MARQUES = { apple: 'Apple', pixel: 'Google Pixel', samsung: 'Samsung' };
+
+            function fcfa(n) { return n.toLocaleString('fr-FR').replace(/\u202f|\u00a0/g, ' '); }
+
+            function afficher(budget) {
+                if (!budget || budget <= 0) {
+                    resultats.innerHTML = '';
+                    resume.textContent = '';
+                    lienWA.href = 'https://wa.me/237682228623';
+                    return;
+                }
+
+                var trouves = CATALOGUE.filter(function (p) { return p.p <= budget; })
+                                       .sort(function (a, b) { return b.p - a.p; });
+
+                if (!trouves.length) {
+                    // On ne laisse jamais l'utilisateur sur un écran vide : on
+                    // propose le modèle le moins cher plutôt que rien.
+                    var mini = CATALOGUE.slice().sort(function (a, b) { return a.p - b.p; })[0];
+                    // Tournure sans article : évite « le iPhone » / « le Galaxy ».
+                    resume.innerHTML = 'Aucun mod&egrave;le sous ' + fcfa(budget) + ' FCFA. Le plus accessible : <strong class="text-red-400">'
+                        + mini.n + '</strong>, &agrave; ' + fcfa(mini.p) + ' FCFA.';
+                    trouves = [mini];
+                } else {
+                    resume.innerHTML = '<strong class="text-red-400">' + trouves.length + '</strong> mod&egrave;le'
+                        + (trouves.length > 1 ? 's' : '') + ' dans votre budget.';
+                }
+
+                resultats.innerHTML = trouves.map(function (p) {
+                    return '<button type="button" class="budget-resultat text-left bg-red-50 border border-red-200 hover:border-red-400 rounded-lg px-5 py-4 transition" data-cible="' + p.n + '">'
+                         + '<span class="block text-xs text-gray-500 mb-1">' + MARQUES[p.b] + '</span>'
+                         + '<span class="block font-bold text-gray-800">' + p.n + '</span>'
+                         + '<span class="block text-red-400 font-bold mt-1">' + fcfa(p.p) + ' FCFA</span>'
+                         + '</button>';
+                }).join('');
+
+                lienWA.href = 'https://wa.me/237682228623?text='
+                    + encodeURIComponent('Bonjour MANN STORE, mon budget est de ' + fcfa(budget) + ' FCFA. Que me conseillez-vous ?');
+            }
+
+            input.addEventListener('input', function () { afficher(parseInt(input.value, 10)); });
+
+            document.querySelectorAll('.budget-chip').forEach(function (chip) {
+                chip.addEventListener('click', function () {
+                    input.value = chip.getAttribute('data-budget');
+                    afficher(parseInt(chip.getAttribute('data-budget'), 10));
+                });
+            });
+
+            // Un résultat renvoie vers la fiche du catalogue et la met en évidence.
+            resultats.addEventListener('click', function (e) {
+                var btn = e.target.closest('.budget-resultat');
+                if (!btn) return;
+                var cible = [].slice.call(document.querySelectorAll('#produits .customize-btn'))
+                    .filter(function (b) { return b.getAttribute('data-product') === btn.getAttribute('data-cible'); })[0];
+                if (!cible) return;
+                var carte = cible.closest('.bg-red-50');
+                carte.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                carte.style.transition = 'box-shadow .3s';
+                carte.style.boxShadow = '0 0 0 2px #d4af37';
+                setTimeout(function () { carte.style.boxShadow = ''; }, 2200);
+            });
+        })();
+    </script>
+    <!-- SECTIONS-GENEREES-FIN -->
+
+    <footer id="contact" class="bg-red-400 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MANNSTORE</h3>
+                    <p class="mb-4">Votre boutique de smartphones préférée à Douala.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-red-100 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-red-100 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-red-100 transition"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Horaires</h3>
+                    <ul class="space-y-2">
+                        <li>Lundi - Vendredi: 8h - 18h</li>
+                        <li>Samedi: 9h - 15h</li>
+                        <li>Dimanche: Fermé</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> Douala, Cameroun</li>
+                        <li><i class="fas fa-phone mr-2"></i> +237 682 228 623</li>
+                        <li><i class="fas fa-envelope mr-2"></i> derrickwabo771@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-red-300 mt-8 pt-8 text-center">
+                <p>&copy; 2023 MANNSTORE. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Cart functionality
+        const cartButton = document.getElementById('cart-button');
+        const cartSlide = document.getElementById('cart-slide');
+        const closeCart = document.getElementById('close-cart');
+        const backdrop = document.getElementById('backdrop');
+        const cartCount = document.getElementById('cart-count');
+        
+        let cart = [];
+        
+        cartButton.addEventListener('click', () => {
+            cartSlide.classList.add('open');
+            backdrop.classList.add('active');
+            updateCartDisplay();
+            refreshStockDisplay();
+        });
+        
+        closeCart.addEventListener('click', () => {
+            cartSlide.classList.remove('open');
+            backdrop.classList.remove('active');
+        });
+        
+        backdrop.addEventListener('click', () => {
+            cartSlide.classList.remove('open');
+            backdrop.classList.remove('active');
+            document.querySelector('.customization-modal.active')?.classList.remove('active');
+            document.getElementById('checkout-modal').classList.remove('active');
+            document.getElementById('confirmation-modal').classList.remove('active');
+            backdrop.classList.remove('active');
+        });
+        
+        // Boutons d'ajout au panier
+        const customizeButtons = document.querySelectorAll('.customize-btn');
+        
+        // --- Gestion du stock -------------------------------------------
+        // Nombre d'exemplaires d'un modèle déjà présents au panier.
+        function unitsInCart(product) {
+            return cart.filter(item => item.product === product).length;
+        }
+
+        // Renvoie le libellé du cadeau si la fiche l'annonce, sinon null.
+        function giftOf(product) {
+            const btn = [...customizeButtons].find(b => b.getAttribute('data-product') === product);
+            return btn && btn.getAttribute('data-gift') === '1' ? 'Montre connectée offerte' : null;
+        }
+
+        function stockOf(product) {
+            const btn = [...customizeButtons].find(b => b.getAttribute('data-product') === product);
+            return btn ? parseInt(btn.getAttribute('data-stock'), 10) : 0;
+        }
+
+        // Répercute le stock restant sur chaque carte produit.
+        function refreshStockDisplay() {
+            customizeButtons.forEach(btn => {
+                const product = btn.getAttribute('data-product');
+                const left = stockOf(product) - unitsInCart(product);
+                const card = btn.closest('.flex.flex-col');
+                const line = card ? card.querySelector('.stock-line') : null;
+
+                if (line) {
+                    if (left <= 0) {
+                        line.innerHTML = '<i class="fas fa-times-circle mr-1"></i>Rupture de stock';
+                    } else {
+                        line.innerHTML = '<i class="fas fa-box mr-1"></i><span class="stock-left">' + left + '</span> pièce' + (left > 1 ? 's' : '') + ' en stock';
+                    }
+                    line.classList.toggle('text-green-600', left > 2);
+                    line.classList.toggle('text-orange-500', left > 0 && left <= 2);
+                    line.classList.toggle('text-red-500', left <= 0);
+                }
+
+                btn.disabled = left <= 0;
+                btn.classList.toggle('opacity-50', left <= 0);
+                btn.classList.toggle('cursor-not-allowed', left <= 0);
+                btn.textContent = left <= 0 ? 'Indisponible' : 'Ajouter au panier';
+            });
+        }
+
+        customizeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const product = button.getAttribute('data-product');
+                const price = button.getAttribute('data-price');
+
+                if (unitsInCart(product) >= stockOf(product)) {
+                    alert('Stock épuisé : il ne reste plus de ' + product + ' disponible.');
+                    return;
+                }
+                
+                // Ajout direct au panier. L'ancienne modale proposait des
+                // capacités et des couleurs génériques, identiques pour les 20
+                // modèles : elle produisait des lignes de commande fausses
+                // (« iPhone 16 Plus 64GB », qui n'existe pas) et allongeait le
+                // tunnel d'achat sans rien apporter.
+                cart.push({
+                    product,
+                    // Le cadeau n'est lu que sur la fiche : un modèle exclu de
+                    // l'offre ne doit pas l'emporter dans le panier.
+                    gift: giftOf(product),
+                    price: parseInt(price, 10)
+                });
+
+                cartCount.textContent = cart.length;
+                cartSlide.classList.add('open');
+                updateCartDisplay();
+                refreshStockDisplay();
+            });
+        });
+
+        refreshStockDisplay();
+
+        // Update cart display
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            const cartSubtotal = document.getElementById('cart-subtotal');
+            const cartTotal = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">Votre panier est vide</p>';
+                cartSubtotal.textContent = '0 FCFA';
+                cartTotal.textContent = '0 FCFA';
+                return;
+            }
+            
+            let itemsHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach((item, index) => {
+                subtotal += item.price;
+                
+                itemsHTML += `
+                    <div class="flex justify-between items-start mb-4 pb-4 border-b border-gray-200">
+                        <div>
+                            <h4 class="font-bold">${item.product}</h4>
+                            ${item.gift ?
+                                `<p class="text-xs text-red-400 font-semibold mt-1"><i class="fas fa-gift"></i> ${item.gift}</p>` :
+                                ''}
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold">${item.price.toLocaleString()} FCFA</p>
+                            <button class="remove-item text-red-400 text-xs mt-1" data-index="${index}">
+                                <i class="fas fa-trash"></i> Supprimer
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = itemsHTML;
+            cartSubtotal.textContent = `${subtotal.toLocaleString()} FCFA`;
+            cartTotal.textContent = `${subtotal.toLocaleString()} FCFA`;
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.closest('button').getAttribute('data-index'));
+                    cart.splice(index, 1);
+                    cartCount.textContent = cart.length;
+                    updateCartDisplay();
+                    refreshStockDisplay();
+                });
+            });
+        }
+        
+        // Checkout
+        const checkoutButton = document.getElementById('checkout-btn');
+        const checkoutModal = document.getElementById('checkout-modal');
+        const closeCheckout = document.getElementById('close-checkout');
+        const checkoutForm = document.getElementById('checkout-form');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const closeConfirmation = document.getElementById('close-confirmation');
+        
+        checkoutButton.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            
+            checkoutModal.classList.add('active');
+            backdrop.classList.add('active');
+        });
+        
+        closeCheckout.addEventListener('click', () => {
+            checkoutModal.classList.remove('active');
+            backdrop.classList.remove('active');
+        });
+        
+        // Numéro WhatsApp de la boutique — destinataire des commandes.
+        const WHATSAPP_BOUTIQUE = '237682228623';
+
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Auparavant la commande partait dans console.log : le client voyait
+            // une confirmation et la boutique ne recevait rien. Elle est
+            // désormais transmise par WhatsApp, seul canal réellement en place.
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const paiement = {
+                'momo-mtn': 'MTN Mobile Money',
+                'momo-orange': 'Orange Money',
+                'cash': 'Espèces à la livraison',
+            }[checkoutForm.elements.payment.value] || checkoutForm.elements.payment.value;
+
+            const lignes = cart.map((item, i) =>
+                `${i + 1}. ${item.product} — ${item.price.toLocaleString('fr-FR')} FCFA`
+                + (item.gift ? ` (+ ${item.gift})` : '')
+            );
+
+            const message = [
+                'NOUVELLE COMMANDE — MANN STORE',
+                '',
+                'Client : ' + checkoutForm.elements.name.value,
+                'Téléphone : ' + checkoutForm.elements.phone.value,
+                'Adresse : ' + checkoutForm.elements.address.value,
+                'Paiement : ' + paiement,
+                '',
+                'Articles :',
+                ...lignes,
+                '',
+                'TOTAL : ' + total.toLocaleString('fr-FR') + ' FCFA',
+            ].join('\n');
+
+            window.open('https://wa.me/' + WHATSAPP_BOUTIQUE + '?text=' + encodeURIComponent(message), '_blank');
+
+            checkoutModal.classList.remove('active');
+            confirmationModal.classList.add('active');
+        });
+        
+        closeConfirmation.addEventListener('click', () => {
+            confirmationModal.classList.remove('active');
+            backdrop.classList.remove('active');
+            cartSlide.classList.remove('open');
+            
+            // Empty cart
+            cart = [];
+            cartCount.textContent = '0';
+            updateCartDisplay();
+            refreshStockDisplay();
+        });
+
+
+    </script>
+</body>
+</html>

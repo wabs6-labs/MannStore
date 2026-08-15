@@ -1,0 +1,40 @@
+# ==========================================================================
+# MANN STORE — configuration Netlify
+# Site statique : aucune commande de build, on publie le dossier tel quel.
+# ==========================================================================
+
+[build]
+  publish = "."
+  command = ""
+
+# --- Cache -----------------------------------------------------------------
+# Les photos produit ne changent qu'au renouvellement du stock : cache long.
+# Le HTML porte les prix et le stock — il ne doit jamais être figé.
+[[headers]]
+  for = "/assets/products/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
+[[headers]]
+  for = "/assets/brand/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, must-revalidate"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# --- En-têtes de sécurité --------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+    # CSP volontairement permissive : la page charge Tailwind et Font Awesome
+    # depuis leur CDN, et Tailwind compile le CSS à l'exécution — ce qui impose
+    # 'unsafe-inline' et 'unsafe-eval'. Compiler Tailwind en amont permettrait
+    # de resserrer cette règle à 'self' ; c'est le point 9 de l'audit.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'"
