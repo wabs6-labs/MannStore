@@ -9,4 +9,7 @@ Site statique : aucune étape de build. Vercel sert les fichiers tels quels.
 - `assets/brand/` — logo, favicon, image de partage
 - `vercel.json` — cache et en-têtes de sécurité
 
-En ligne : https://mann-store-six.vercel.app
+En ligne : https://mann-store.netlify.app
+
+> Ce depot alimente un projet Vercel qui **redirige** desormais vers Netlify,
+> site officiel de la boutique. Les fichiers sont conserves comme copie de secours.

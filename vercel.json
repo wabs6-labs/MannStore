@@ -2,34 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "headers": [
-    {
-      "source": "/assets/products/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=604800, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/assets/brand/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/(.*).html",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    },
+
+  "comment": "Le site officiel de MANN STORE est https://mann-store.netlify.app. Ce projet Vercel ne sert plus la boutique : il redirige, afin d'eviter deux copies concurrentes du meme site (contenu duplique, referencement divise, prix qui divergent). Les fichiers restent dans le depot comme copie de secours.",
+
+  "redirects": [
     {
       "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=(), interest-cohort=()" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'" }
-      ]
+      "destination": "https://mann-store.netlify.app/$1",
+      "permanent": true
     }
   ]
 }
