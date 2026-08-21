@@ -2,9 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-
-  "comment": "Le site officiel de MANN STORE est https://mann-store.netlify.app. Ce projet Vercel ne sert plus la boutique : il redirige, afin d'eviter deux copies concurrentes du meme site (contenu duplique, referencement divise, prix qui divergent). Les fichiers restent dans le depot comme copie de secours.",
-
   "redirects": [
     {
       "source": "/(.*)",
